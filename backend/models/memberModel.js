@@ -2,39 +2,35 @@ import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema(
   {
-    clerkId: { type: String, required: true }, // Clerk user ID
-    name: { type: String, required: true },
-    photo: { type: String }, // Cloudinary URL
-    email: { type: String, required: true, unique: true },
-    role: { type: String, required: true },
-    phone: { type: String, required: true },
-    department: { type: String, required: true },
-    kgidNumber: { type: String },
-    permanentAddress: { type: String },
-    currentAddress: { type: String },
-    guardian: { type: String },
-    dob: { type: Date },
-    designation: { type: String, required: true },
-    workingCollegeName: { type: String },
+    clerkId: { type: String, required: true },
 
-    memberType: {
-      type: String,
-      enum: ["A", "B", "C"],
-      required: true,
-    },
+    name: { type: String, required: true },
+    photo: String,
+
+    email: { type: String, required: true, unique: true },
+    phone: { type: String, required: true },
+    gender: String,
+    dob: Date,
+    guardian: String,
+
+    occupationType: String,
+    employerName: String,
+    monthlyIncomeRange: String,
+
+    permanentAddress: String,
+
+    societyNumber: { type: String, unique: true, required: true },
     joiningDate: { type: Date, required: true },
-    resignDate: { type: Date },
-    societyNumber: { type: String, unique: true },
+    resignDate: Date,
+
+    role: { type: String, default: "member" },
     status: {
       type: String,
       enum: ["active", "closed"],
       default: "active",
-      required: true,
     },
   },
   { timestamps: true }
 );
 
-const Member = mongoose.model("Member", memberSchema);
-
-export default Member;
+export default mongoose.model("Member", memberSchema);
